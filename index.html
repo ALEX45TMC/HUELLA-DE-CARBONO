@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Huella de carbono y basuras en Colombia: problemáticas y soluciones</title>
+<meta name="description" content="La huella de carbono en Colombia: causas, emisiones por sector, reciclaje, generación de basuras y soluciones concretas.">
+<style>
+:root{
+  --bg:#0d1512;
+  --bg-soft:#13201b;
+  --card:#18271f;
+  --line:#26382e;
+  --text:#e8f1ea;
+  --muted:#9bb3a5;
+  --green:#3ddc97;
+  --yellow:#ffd452;
+  --orange:#ff9b54;
+  --red:#ff6b6b;
+  --blue:#5ec8e5;
+  --radius:14px;
+  --maxw:1120px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+img,svg{max-width:100%;display:block}
+a{color:var(--green)}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+
+/* ---------- navegación ---------- */
+nav{
+  position:sticky;top:0;z-index:20;
+  background:rgba(13,21,18,.86);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+nav .wrap{display:flex;align-items:center;gap:18px;height:58px}
+.brand{font-weight:700;letter-spacing:.2px;white-space:nowrap}
+.brand span{color:var(--green)}
+.links{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+.links::-webkit-scrollbar{display:none}
+.links a{
+  color:var(--muted);text-decoration:none;font-size:14px;
+  padding:7px 12px;border-radius:999px;white-space:nowrap;
+}
+.links a:hover{color:var(--text);background:var(--bg-soft)}
+
+/* ---------- portada ---------- */
+header{
+  padding:74px 0 58px;
+  background:
+    radial-gradient(1000px 420px at 15% -10%,rgba(61,220,151,.16),transparent 60%),
+    radial-gradient(700px 380px at 90% 0%,rgba(255,212,82,.10),transparent 60%);
+  border-bottom:1px solid var(--line);
+}
+.kicker{
+  display:inline-block;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--green);border:1px solid var(--line);border-radius:999px;padding:6px 13px;
+  background:rgba(61,220,151,.07);
+}
+h1{font-size:clamp(30px,5.4vw,54px);line-height:1.1;margin:18px 0 14px;letter-spacing:-.5px}
+h1 em{font-style:normal;color:var(--green)}
+.lede{font-size:clamp(16px,2.2vw,19px);color:var(--muted);max-width:78ch;margin:0}
+.hero-figs{
+  display:flex;flex-wrap:wrap;gap:12px;margin-top:32px;
+}
+.chip{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:14px 18px;min-width:150px;flex:1 1 auto;
+}
+.chip b{display:block;font-size:26px;line-height:1.15;letter-spacing:-.5px}
+.chip small{color:var(--muted);font-size:13px}
+
+/* ---------- secciones ---------- */
+section{padding:64px 0;border-bottom:1px solid var(--line)}
+.section-head{max-width:78ch;margin-bottom:34px}
+.num{
+  font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+  display:flex;align-items:center;gap:10px;margin-bottom:10px;
+}
+.num i{
+  font-style:normal;width:26px;height:26px;border-radius:8px;
+  display:grid;place-items:center;background:var(--green);color:#08251a;font-weight:700;font-size:13px;
+}
+h2{font-size:clamp(24px,3.6vw,36px);line-height:1.2;margin:0 0 12px;letter-spacing:-.4px}
+h3{font-size:19px;margin:0 0 8px}
+p{margin:0 0 14px}
+.sub{color:var(--muted);font-size:17px}
+
+/* ---------- definición ---------- */
+.def{
+  display:grid;grid-template-columns:1.15fr .85fr;gap:26px;align-items:stretch;margin-bottom:38px;
+}
+.def-card,.gas-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:26px;
+}
+.def-card{border-left:3px solid var(--green)}
+.def-card p:last-child{margin-bottom:0}
+.gases{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.gases li{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start}
+.gases .sym{
+  font-size:13px;font-weight:700;letter-spacing:-.3px;text-align:center;
+  border-radius:10px;padding:9px 4px;background:var(--bg-soft);border:1px solid var(--line);
+}
+.gases li:nth-child(1) .sym{color:var(--blue)}
+.gases li:nth-child(2) .sym{color:var(--orange)}
+.gases li:nth-child(3) .sym{color:var(--yellow)}
+.gases strong{display:block;font-size:15px}
+.gases small{color:var(--muted);font-size:13.5px;line-height:1.5}
+
+/* ---------- barras de sectores ---------- */
+.bars{display:grid;gap:16px;margin:0}
+.bar-row{display:grid;grid-template-columns:230px 1fr 74px;gap:16px;align-items:center}
+.bar-row .label{font-size:15px;font-weight:600}
+.bar-row .label small{display:block;font-weight:400;color:var(--muted);font-size:12.5px}
+.track{height:26px;border-radius:8px;background:var(--bg-soft);border:1px solid var(--line);overflow:hidden}
+.fill{
+  height:100%;width:0;border-radius:7px;transition:width 1.1s cubic-bezier(.22,.61,.36,1);
+}
+.bar-row .pct{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
+.bar-row[data-c="1"] .fill{background:linear-gradient(90deg,#2bbf83,#4fe3a6)}
+.bar-row[data-c="2"] .fill{background:linear-gradient(90deg,#e08a3c,#ffb26e)}
+.bar-row[data-c="3"] .fill{background:linear-gradient(90deg,#dcc23f,#ffdf72)}
+.bar-row[data-c="4"] .fill{background:linear-gradient(90deg,#4aa9c4,#7fdcf4)}
+.bar-row[data-c="5"] .fill{background:linear-gradient(90deg,#d95c5c,#ff8f8f)}
+
+.legend-note{color:var(--muted);font-size:13px;margin-top:18px}
+
+/* ---------- grid de tarjetas ---------- */
+.grid{display:grid;gap:18px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;
+  transition:transform .18s ease,border-color .18s ease;
+}
+.card:hover{transform:translateY(-3px);border-color:#3a5344}
+.card .tag{
+  display:inline-block;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:#08251a;background:var(--green);border-radius:999px;padding:4px 11px;font-weight:700;margin-bottom:12px;
+}
+.card h3{font-size:17px}
+.card ul{margin:10px 0 0;padding-left:19px;color:var(--muted)}
+.card li{margin-bottom:7px;line-height:1.55}
+.card li strong{color:var(--text);font-weight:600}
+
+/* ---------- consecuencia banner ---------- */
+.alert{
+  margin-top:28px;background:linear-gradient(180deg,rgba(255,107,107,.10),rgba(255,107,107,.04));
+  border:1px solid #4a2f33;border-radius:var(--radius);padding:22px 24px;
+}
+.alert h3{color:#ffb4b4;display:flex;align-items:center;gap:9px}
+.alert p{color:#f0d9d9;margin-bottom:0}
+
+/* ---------- stats grandes ---------- */
+.stat{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:24px;text-align:left;
+}
+.stat b{display:block;font-size:clamp(30px,4.6vw,44px);line-height:1;letter-spacing:-1px;color:var(--green)}
+.stat.amber b{color:var(--yellow)}
+.stat.red b{color:var(--red)}
+.stat.blue b{color:var(--blue)}
+.stat span{display:block;margin-top:10px;color:var(--muted);font-size:14px;line-height:1.5}
+
+/* ---------- donut / progreso de reciclaje ---------- */
+.recycle{display:grid;grid-template-columns:300px 1fr;gap:34px;align-items:center}
+.ring{position:relative}
+.ring svg{width:100%;height:auto;transform:rotate(-90deg)}
+.ring .center{
+  position:absolute;inset:0;display:grid;place-content:center;text-align:center;
+}
+.ring .center b{font-size:40px;letter-spacing:-1px;color:var(--green);line-height:1}
+.ring .center small{color:var(--muted);font-size:13px}
+.meters{display:grid;gap:20px}
+.meter .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:7px}
+.meter .top strong{font-size:15px}
+.meter .top em{font-style:normal;font-weight:700;font-variant-numeric:tabular-nums}
+.meter .track{height:12px}
+.meter .fill{border-radius:6px}
+.meter small{display:block;color:var(--muted);font-size:13px;margin-top:6px}
+.m1 .fill{background:linear-gradient(90deg,#2bbf83,#4fe3a6)}
+.m2 .fill{background:linear-gradient(90deg,#dcc23f,#ffdf72)}
+.m3 .fill{background:linear-gradient(90deg,#d95c5c,#ff8f8f)}
+
+/* ---------- basuras: desglose visual ---------- */
+.waste-visual{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:26px;margin-top:26px;
+}
+.stack{display:flex;height:52px;border-radius:12px;overflow:hidden;border:1px solid var(--line);margin:6px 0 16px}
+.stack div{display:grid;place-items:center;font-size:14px;font-weight:700;color:#08251a}
+.stack .landfill{background:linear-gradient(180deg,#ff8f8f,#e05c5c);color:#3a0d0d}
+.stack .other{background:linear-gradient(180deg,#4fe3a6,#2bbf83)}
+.stack-key{display:flex;flex-wrap:wrap;gap:20px;color:var(--muted);font-size:13.5px}
+.stack-key i{width:12px;height:12px;border-radius:3px;display:inline-block;margin-right:7px}
+
+/* ---------- meta país ---------- */
+.goals{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:24px}
+.goal{
+  border:1px solid var(--line);border-radius:var(--radius);padding:24px;
+  background:radial-gradient(600px 200px at 20% 0%,rgba(61,220,151,.10),transparent 70%),var(--card);
+}
+.goal .year{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.goal b{display:block;font-size:clamp(34px,5vw,50px);letter-spacing:-1.5px;color:var(--green);line-height:1.05;margin:6px 0}
+.goal p{color:var(--muted);margin:0}
+
+/* ---------- footer ---------- */
+footer{padding:44px 0 60px;color:var(--muted);font-size:13.5px}
+footer h3{font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--text);margin:0 0 10px}
+footer ol{padding-left:20px;margin:0}
+footer li{margin-bottom:5px}
+footer .disc{margin-top:22px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px}
+
+/* ---------- conciencia: cadena causa-efecto ---------- */
+.chain{display:grid;gap:0;margin:8px 0 30px}
+.chain-step{
+  display:grid;grid-template-columns:38px 1fr;gap:16px;align-items:start;
+  padding-bottom:22px;position:relative;
+}
+.chain-step::before{
+  content:"";position:absolute;left:18px;top:38px;bottom:0;width:2px;background:var(--line);
+}
+.chain-step:last-child::before{display:none}
+.chain-step .dot{
+  width:38px;height:38px;border-radius:50%;display:grid;place-items:center;
+  background:var(--bg-soft);border:1px solid var(--line);font-weight:700;font-size:14px;color:var(--green);
+  position:relative;z-index:1;
+}
+.chain-step.bad .dot{color:#ff8f8f;border-color:#4a2f33}
+.chain-step h4{margin:6px 0 4px;font-size:16.5px}
+.chain-step p{margin:0;color:var(--muted);font-size:14.5px;max-width:70ch}
+
+/* ---------- calculadora personal ---------- */
+.calc{
+  background:linear-gradient(180deg,rgba(94,200,229,.07),transparent),var(--card);
+  border:1px solid var(--line);border-radius:var(--radius);padding:26px;margin-top:8px;
+}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:center}
+input[type=range]{width:100%;accent-color:var(--green);height:26px}
+.calc label{display:block;font-size:14px;color:var(--muted);margin-bottom:8px}
+.calc .who{font-size:22px;font-weight:700;letter-spacing:-.3px;margin:2px 0 14px}
+.calc-out{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.calc-out div{background:var(--bg-soft);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.calc-out b{display:block;font-size:24px;letter-spacing:-.5px;color:var(--blue);font-variant-numeric:tabular-nums}
+.calc-out small{color:var(--muted);font-size:12.5px;line-height:1.45;display:block;margin-top:4px}
+.presets{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.presets button{
+  background:var(--bg-soft);color:var(--muted);border:1px solid var(--line);border-radius:999px;
+  padding:6px 13px;font-size:13px;cursor:pointer;font-family:inherit;
+}
+.presets button:hover{color:var(--text);border-color:#3a5344}
+
+/* ---------- escalera de soluciones ---------- */
+.ladder{display:grid;gap:16px;counter-reset:step}
+.step{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:24px;display:grid;grid-template-columns:56px 1fr;gap:20px;position:relative;overflow:hidden;
+}
+.step::after{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--lvl,#3ddc97);
+}
+.step .n{
+  width:56px;height:56px;border-radius:14px;display:grid;place-items:center;
+  background:var(--bg-soft);border:1px solid var(--line);font-weight:800;font-size:20px;color:var(--lvl,#3ddc97);
+}
+.step h3{margin:2px 0 6px;font-size:19px}
+.step .who{
+  display:inline-block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);
+  border:1px solid var(--line);border-radius:999px;padding:3px 10px;margin-bottom:12px;
+}
+.step ul{margin:0;padding-left:19px;color:var(--muted)}
+.step li{margin-bottom:7px;line-height:1.55}
+.step li strong{color:var(--text);font-weight:600}
+.meters-inline{display:flex;flex-wrap:wrap;gap:18px;margin-top:14px}
+.mi{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted)}
+.mi .pips{display:flex;gap:3px}
+.mi .pips i{width:9px;height:9px;border-radius:50%;background:var(--line);display:block}
+.mi .pips i.on{background:var(--lvl,#3ddc97)}
+.ladder-scale{
+  display:flex;align-items:center;gap:12px;color:var(--muted);font-size:13px;margin:0 0 24px;
+}
+.ladder-scale .line{flex:1;height:6px;border-radius:999px;background:linear-gradient(90deg,#3ddc97,#ffd452,#ff9b54,#ff6b6b)}
+
+/* ---------- minijuegos ---------- */
+.game{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;margin-top:24px;
+}
+.game-head{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:6px}
+.game-head h3{margin:0}
+.score{display:flex;gap:10px;align-items:center;font-size:13.5px;color:var(--muted)}
+.score b{color:var(--text);font-variant-numeric:tabular-nums;font-size:16px}
+.btn{
+  background:var(--green);color:#08251a;border:0;border-radius:999px;padding:9px 16px;
+  font-weight:700;font-size:13.5px;cursor:pointer;font-family:inherit;
+}
+.btn.ghost{background:var(--bg-soft);color:var(--muted);border:1px solid var(--line);font-weight:600}
+.btn.ghost:hover{color:var(--text);border-color:#3a5344}
+.hint{color:var(--muted);font-size:14px;margin:6px 0 18px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.pair-col h4{
+  margin:0 0 10px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+}
+.opts{display:grid;gap:9px}
+.opt{
+  text-align:left;background:var(--bg-soft);border:1px solid var(--line);border-radius:11px;
+  padding:12px 14px;color:var(--text);cursor:pointer;font-family:inherit;font-size:14.5px;line-height:1.45;
+  transition:border-color .15s ease,background .15s ease,transform .15s ease;
+}
+.opt:hover:not(:disabled){border-color:#4c6b58;transform:translateX(2px)}
+.opt.sel{border-color:var(--green);background:rgba(61,220,151,.12)}
+.opt.done{border-color:#2f6a4f;background:rgba(61,220,151,.18);color:#a9f0cf;cursor:default;opacity:.85}
+.opt.wrong{border-color:#8a3d3d;background:rgba(255,107,107,.14);animation:shake .35s ease}
+@keyframes shake{
+  0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}
+}
+.fb{
+  margin-top:16px;min-height:24px;font-size:14.5px;color:var(--muted);
+  border-left:3px solid var(--line);padding-left:12px;
+}
+.fb.ok{color:#a9f0cf;border-color:var(--green)}
+.fb.no{color:#ffb4b4;border-color:#8a3d3d}
+.bags{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:8px}
+.bag{
+  border-radius:12px;padding:14px;text-align:center;cursor:pointer;font-family:inherit;
+  border:2px dashed var(--line);background:var(--bg-soft);color:var(--text);transition:transform .15s ease,border-color .15s ease;
+}
+.bag:hover:not(:disabled){transform:translateY(-2px)}
+.bag .ico{font-size:26px;display:block;line-height:1}
+.bag strong{display:block;font-size:15px;margin-top:6px}
+.bag small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+.bag[data-bag="blanca"]{border-color:#8fa79a}
+.bag[data-bag="negra"]{border-color:#4c6b58}
+.bag[data-bag="verde"]{border-color:#3ddc97}
+.bag.sel{background:rgba(61,220,151,.14);border-style:solid}
+.bag.wrong{border-color:#8a3d3d;background:rgba(255,107,107,.14);animation:shake .35s ease}
+.tray{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 6px;min-height:44px}
+.item{
+  background:var(--bg-soft);border:1px solid var(--line);border-radius:999px;padding:8px 14px;
+  font-size:14px;cursor:pointer;font-family:inherit;color:var(--text);transition:all .15s ease;
+}
+.item:hover:not(:disabled){border-color:#4c6b58}
+.item.sel{border-color:var(--yellow);background:rgba(255,212,82,.12)}
+.item.gone{opacity:.28;text-decoration:line-through;pointer-events:none}
+.tally{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+.tally div{background:var(--bg-soft);border:1px solid var(--line);border-radius:10px;padding:10px;text-align:center}
+.tally b{display:block;font-size:19px;color:var(--green);font-variant-numeric:tabular-nums}
+.tally small{font-size:12px;color:var(--muted)}
+
+/* ---------- responsive ---------- */
+@media (max-width:900px){
+  .def,.recycle,.calc-grid,.pair{grid-template-columns:1fr}
+  .g4{grid-template-columns:repeat(2,1fr)}
+  .g3{grid-template-columns:1fr}
+  .ring{max-width:280px;margin:0 auto}
+}
+@media (max-width:680px){
+  .bar-row{grid-template-columns:1fr;gap:8px}
+  .bar-row .pct{text-align:left}
+  .g2,.g4,.goals{grid-template-columns:1fr}
+  .step{grid-template-columns:1fr;gap:14px}
+  .bags,.tally{grid-template-columns:1fr}
+  .calc-out{grid-template-columns:1fr}
+  section{padding:48px 0}
+  header{padding:52px 0 40px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .fill{transition:none}
+  .card:hover{transform:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">Colombia <span>baja</span> en carbono</div>
+    <div class="links">
+      <a href="#problematicas">Problemáticas</a>
+      <a href="#conciencia">Conciencia</a>
+      <a href="#soluciones">Soluciones</a>
+      <a href="#reciclaje">Reciclaje</a>
+      <a href="#basuras">Basuras</a>
+      <a href="#juegos">Juegos</a>
+      <a href="#metas">Metas país</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap">
+    <span class="kicker">Ambiental · Datos · Colombia</span>
+    <h1>La huella de carbono y las basuras en Colombia: <em>problemáticas y soluciones</em></h1>
+    <p class="lede">
+      La huella de carbono es la cantidad total de gases de efecto invernadero que generamos con nuestras
+      actividades diarias. En Colombia no viene tanto de las fábricas o de los hogares: viene del campo,
+      de los bosques que se talan y de los carros. Y las basuras —12 millones de toneladas al año— terminan
+      casi todas enterradas en rellenos que se llenan.
+    </p>
+    <div class="hero-figs">
+      <div class="chip"><b>41,4 %</b><small>emisiones por deforestación</small></div>
+      <div class="chip"><b>12 M t/año</b><small>basuras generadas</small></div>
+      <div class="chip"><b>17–20 %</b><small>de los residuos se recicla</small></div>
+      <div class="chip"><b>&lt; 8 %</b><small>del plástico se recicla</small></div>
+      <div class="chip"><b>83 %</b><small>termina en relleno sanitario</small></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ 1. QUÉ ES Y PROBLEMÁTICAS ============ -->
+<section id="problematicas">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="num"><i>1</i> ¿Qué es y cuáles son las problemáticas?</div>
+      <h2>Una huella que en Colombia se mide en bosques, carros y vacas</h2>
+      <p class="sub">
+        Es la cantidad total de gases de efecto invernadero —CO₂, metano y óxido nitroso— que generamos con
+        nuestras actividades diarias. Abajo, cómo se reparte en el país según el IDEAM, con el promedio de los
+        últimos 20 años.
+      </p>
+    </div>
+
+    <div class="def">
+      <div class="def-card">
+        <h3>Los tres gases que suman la huella</h3>
+        <ul class="gases">
+          <li>
+            <span class="sym">CO₂</span>
+            <div><strong>Dióxido de carbono</strong><small>Quema de gasolina y diésel, industrias y tala de bosques que dejan de absorberlo.</small></div>
+          </li>
+          <li>
+            <span class="sym">CH₄</span>
+            <div><strong>Metano</strong><small>Rumoriantes (ganado), arrozales y basuras pudriéndose en rellenos sanitarios. Es ~25 veces más contaminante que el CO₂.</small></div>
+          </li>
+          <li>
+            <span class="sym">N₂O</span>
+            <div><strong>Óxido nitroso</strong><small>Uso excesivo de fertilizantes nitrogenados en la agricultura; contamina además suelos y agua.</small></div>
+          </li>
+        </ul>
+      </div>
+      <div class="def-card">
+        <h3>Por qué importa la cifra del 41,4 %</h3>
+        <p>
+          En la mayoría de países la energía y la industria dominan la huella. En Colombia la causa número uno
+          es <strong>la deforestación y el cambio de uso del suelo</strong>: se talan bosques para ganadería
+          extensiva y cultivos, y al mismo tiempo se emite CO₂ y se eliminan los sumideros naturales que lo
+          absorbían. Es un doble golpe: más emisiones y menos bosque para capturarlas.
+        </p>
+        <p style="margin:0;color:var(--muted)">
+          Por eso la solución colombiana no pasa solo por cambiar bombillos: pasa por el mapa de uso del suelo.
+        </p>
+      </div>
+    </div>
+
+    <h3 style="margin-bottom:18px">Emisiones por sector — últimos 20 años (IDEAM)</h3>
+    <div class="bars" id="bars">
+      <div class="bar-row" data-c="1" data-pct="41.4">
+        <div class="label">Deforestación y cambio de uso del suelo<small>Causa #1 del país</small></div>
+        <div class="track"><div class="fill"></div></div>
+        <div class="pct">41,4 %</div>
+      </div>
+      <div class="bar-row" data-c="2" data-pct="30.03">
+        <div class="label">Transporte y energía<small>Más de 1,5 millones de vehículos en Bogotá</small></div>
+        <div class="track"><div class="fill"></div></div>
+        <div class="pct">30,03 %</div>
+      </div>
+      <div class="bar-row" data-c="3" data-pct="19.57">
+        <div class="label">Agricultura y ganadería<small>Metano rumiante y fertilizantes</small></div>
+        <div class="track"><div class="fill"></div></div>
+        <div class="pct">19,57 %</div>
+      </div>
+      <div class="bar-row" data-c="4" data-pct="6.08">
+        <div class="label">Residuos<small>Metano y lixiviados en rellenos sanitarios</small></div>
+        <div class="track"><div class="fill"></div></div>
+        <div class="pct">6,08 %</div>
+      </div>
+      <div class="bar-row" data-c="5" data-pct="2.92">
+        <div class="label">Otros sectores<small>Diferencial frente al total nacional</small></div>
+        <div class="track"><div class="fill"></div></div>
+        <div class="pct">2,92 %</div>
+      </div>
+    </div>
+    <p class="legend-note">
+      El 6,08 % de residuos parece pequeño, pero es la parte que más crece con el consumo urbano y la que
+      conecta directamente con la sección de basuras más abajo.
+    </p>
+
+    <div class="alert">
+      <h3>⚠ Consecuencias directas ya visibles</h3>
+      <p>
+        Aumento de temperatura, sequías e inundaciones más frecuentes, y pérdida de biodiversidad:
+        <strong>6 de cada 10 humedales del país se han perdido desde 1900</strong>.
+        Hoy hay <strong>381 municipios en alerta por incendios</strong>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 1B. CONCIENCIA ============ -->
+<section id="conciencia">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="num"><i>+</i> Conciencia</div>
+      <h2>Esto pasa en Colombia porque cada problema empieza en una decisión pequeña</h2>
+      <p class="sub">
+        La huella de carbono no la emite «el gobierno» ni «la fábrica de al lado»: la emitimos entre todos, con
+        decisiones que se encadenan. Esta es la cadena que conecta lo que haces hoy con los 381 municipios en
+        alerta por incendios.
+      </p>
+    </div>
+
+    <div class="chain">
+      <div class="chain-step">
+        <span class="dot">1</span>
+        <div>
+          <h4>Prendes el carro, el aire acondicionado, la plancha</h4>
+          <p>Es la punta del ovillo: demanda de gasolina, diésel y energía. De aquí sale el <strong>30,03 %</strong> de las emisiones del país.</p>
+        </div>
+      </div>
+      <div class="chain-step">
+        <span class="dot">2</span>
+        <div>
+          <h4>El plato pide carne y leche a bajo precio</h4>
+          <p>Para bajar el precio se abre frontera: <strong>ganadería extensiva</strong> y cultivos. Ahí se va el <strong>41,4 %</strong> —el bosque talado deja de absorber lo que el ganado sí libera en metano (<strong>19,57 %</strong>).</p>
+        </div>
+      </div>
+      <div class="chain-step">
+        <span class="dot">3</span>
+        <div>
+          <h4>Compras lo que no necesitabas, empacado en plástico</h4>
+          <p>Solo el <strong>32,3 %</strong> de los colombianos compra lo necesario. Resultado: <strong>1,2 millones de toneladas de plástico al año</strong>, de las que se recicla menos del 8 %.</p>
+        </div>
+      </div>
+      <div class="chain-step">
+        <span class="dot">4</span>
+        <div>
+          <h4>Botas todo mezclado en la bolsa negra</h4>
+          <p>Aquí está el <strong>mito que rompe la cadena al revés</strong>: «el camión se lo lleva y ya desapareció». No desaparece. Mezclado, nada es aprovechable: el reciclador de oficio no puede rescatarlo y el camión va directo al relleno.</p>
+        </div>
+      </div>
+      <div class="chain-step bad">
+        <span class="dot">5</span>
+        <div>
+          <h4>El relleno sanitario se llena pudriendo materia orgánica</h4>
+          <p>Sin oxígeno, la basura produce <strong>metano y lixiviados</strong> que bajan al acuífero. El <strong>83 %</strong> de la basura del país termina aquí y <strong>321 rellenos</strong> cumplen vida útil en 4 años.</p>
+        </div>
+      </div>
+      <div class="chain-step bad">
+        <span class="dot">6</span>
+        <div>
+          <h4>Y el clima te devuelve la cuenta</h4>
+          <p>Sequías, inundaciones, incendios y pérdida de biodiversidad: <strong>6 de cada 10 humedales perdidos desde 1900</strong>. Se paga en salud, en agua y en comida más cara. La cadena vuelve al paso 1.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid g3">
+      <div class="card">
+        <span class="tag" style="background:var(--yellow)">Mito</span>
+        <h3>«Yo separo, pero el camión mezcla todo»</h3>
+        <p style="color:var(--muted);margin:0">
+          Ha pasado y es un problema de operador que se debe exigir. Pero no es razón para aflojar: donde el
+          servicio sí recoge separado, el impacto es inmediato. Y donde no, un punto limpio o el compost casero
+          siguen sacando basura del relleno.
+        </p>
+      </div>
+      <div class="card">
+        <span class="tag" style="background:var(--blue)">Conciencia social</span>
+        <h3>El 17–20 % que se recicla tiene nombre</h3>
+        <p style="color:var(--muted);margin:0">
+          Lo sostiene en gran parte el reciclador de oficio, que vive de lo que tú botas aprovechable.
+          Botar una botella en la bolsa negra es tirarle el salario y mandarla a enterrar 300 años.
+        </p>
+      </div>
+      <div class="card">
+        <span class="tag">Conciencia propia</span>
+        <h3>La huella se hereda, no se reparte</h3>
+        <p style="color:var(--muted);margin:0">
+          Los daños de esta década los van a vivir quienes hoy tienen 10 años. Cuidar el bosque del Pacífico o
+          de la Amazonía es un acto con destinatario futuro, aunque nunca lo conozcas.
+        </p>
+      </div>
+    </div>
+
+    <div class="calc" style="margin-top:26px">
+      <h3>¿Cuánto generas tú? Ponle número a tu propia basura</h3>
+      <p style="color:var(--muted);margin-bottom:18px">
+        Multiplica el promedio nacional (0,64–0,95 kg por persona al día) por tu familia, tu curso o tu ciudad.
+        Mueve el control o usa los atajos.
+      </p>
+      <div class="calc-grid">
+        <div>
+          <label for="ppl">Personas generando basura todos los días</label>
+          <div class="who" id="pplOut">3 personas</div>
+          <input type="range" id="ppl" min="0" max="100" value="6" step="1" aria-label="Número de personas">
+          <div class="presets" id="presets">
+            <button type="button" data-p="3">Mi familia</button>
+            <button type="button" data-p="30">Mi curso</button>
+            <button type="button" data-p="500">Mi colegio</button>
+            <button type="button" data-p="5000">Mi barrio</button>
+            <button type="button" data-p="100000">Mi ciudad</button>
+            <button type="button" data-p="8000000">Bogotá</button>
+            <button type="button" data-p="49000000">Colombia</button>
+          </div>
+        </div>
+        <div class="calc-out">
+          <div><b id="kgDay">—</b><small>kg de basura al día</small></div>
+          <div><b id="tYear">—</b><small>toneladas al año</small></div>
+          <div><b id="tLandfill">—</b><small>toneladas enterradas (83 %)</small></div>
+          <div><b id="tSaved">—</b><small>toneladas que hoy se reciclan (17–20 %)</small></div>
+        </div>
+      </div>
+      <p class="legend-note" id="calcNote" style="margin-bottom:0"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2. CÓMO DISMINUIRLA ============ -->
+<section id="soluciones">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="num"><i>2</i> ¿Cómo podemos disminuirla?</div>
+      <h2>Seis soluciones escalonadas: de la que haces hoy en tu cuarto a la que hace el país</h2>
+      <p class="sub">
+        Ordenadas de <strong>más simple a más grande</strong>. Las tres primeras no cuestan dinero y las puedes
+        ejecutar tú solo en tu casa; las últimas necesitan plata, acuerdos o decisiones que no dependen de ti,
+        pero que sí se pueden exigir. Cada tarjeta dice quién la ejecuta, cuánto esfuerzo cuesta y cuánto impacto
+        tiene.
+      </p>
+    </div>
+
+    <div class="ladder-scale">
+      <span>Más simple · solo tú · hoy</span>
+      <span class="line"></span>
+      <span>Más grande · país · 2030–2050</span>
+    </div>
+
+    <div class="ladder">
+
+      <div class="step" style="--lvl:#4fe3a6">
+        <div class="n">1</div>
+        <div>
+          <h3>Apagar lo que no usas y prender lo que consume menos</h3>
+          <span class="who">Lo haces tú solo · en tu cuarto y tu cocina</span>
+          <ul>
+            <li><strong>Cambia a bombillos LED</strong> y apaga las luces al salir del cuarto.</li>
+            <li><strong>Desconecta</strong> cargadores, tele y consola: en stand-by siguen consumiendo.</li>
+            <li><strong>Seca la ropa al sol</strong> en vez de secadora, y tiende bien la ropa para planchar menos.</li>
+            <li><strong>Cierra la llave</strong> mientras te cepillas los dientes y toma duchas de 3–4 minutos:
+            tratar y mover agua también cuesta energía.</li>
+          </ul>
+          <div class="meters-inline">
+            <div class="mi">Esfuerzo<span class="pips"><i class="on"></i><i></i><i></i><i></i><i></i></span></div>
+            <div class="mi">Costo<span class="pips"><i class="on"></i><i></i><i></i><i></i><i></i></span></div>
+            <div class="mi">Impacto<span class="pips"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step" style="--lvl:#3ddc97">
+        <div class="n">2</div>
+        <div>
+          <h3>Separar en tres bolsas y compostar el orgánico</h3>
+          <span class="who">Tú + tu familia · con dos bolsas más en la cocina</span>
+          <ul>
+            <li><strong>Bolsa blanca:</strong> papel, cartón, vidrio, plásticos y metales limpios y secos.</li>
+            <li><strong>Bolsa negra:</strong> lo no aprovechable — pañales, papel higiénico, colillas, icopor sucio.</li>
+            <li><strong>Bolsa verde:</strong> restos de comida y poda, que es justo lo que produce metano en el relleno.</li>
+            <li><strong>Composta en casa</strong> con un balde tapado y con agujeros, o una pila en el patio: cáscara de
+            fruta, borra de café, hojas. En 2–3 meses tienes abono y le sacaste a la basura casi un tercio del peso.</li>
+            <li><strong>Lava los envases</strong> antes de reciclar: un envase sucio contamina el lote entero y se bota.</li>
+          </ul>
+          <div class="meters-inline">
+            <div class="mi">Esfuerzo<span class="pips"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
+            <div class="mi">Costo<span class="pips"><i class="on"></i><i></i><i></i><i></i><i></i></span></div>
+            <div class="mi">Impacto<span class="pips"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step" style="--lvl:#ffd452">
+        <div class="n">3</div>
+        <div>
+          <h3>Cambiar cómo te mueves todos los días</h3>
+          <span class="who">Tú · tu ruta diaria al colegio o al trabajo</span>
+          <ul>
+            <li><strong>Caminar o montar bici</strong> en los trayectos cortos: es lo que más baja la huella por kilómetro.</li>
+            <li><strong>Transporte público</strong> en vez del carro particular: un bus mueve a decenas de personas con un solo motor.</li>
+            <li><strong>Compartir carro</strong> con vecinos o compañeros cuando el vehículo sí toca.</li>
+            <li>Si la familia va a cambiar de vehículo, <strong>híbrido o eléctrico</strong> y del tamaño justo.</li>
+            <li>En Bogotá, el parque automotor de <strong>más de 1,5 millones de vehículos</strong> a gasolina y diésel
+            explica buena parte de la contaminación del aire y de la congestión.</li>
+          </ul>
+          <div class="meters-inline">
+            <div class="mi">Esfuerzo<span class="pips"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
+            <div class="mi">Costo<span class="pips"><i class="on"></i><i></i><i></i><i></i><i></i></span></div>
+            <div class="mi">Impacto<span class="pips"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step" style="--lvl:#ff9b54">
+        <div class="n">4</div>
+        <div>
+          <h3>Comprar menos y comprar distinto</h3>
+          <span class="who">Tu familia · el mercado y las compras del mes</span>
+          <ul>
+            <li><strong>Comprar solo lo necesario.</strong> Hoy solo el <strong>32,3 %</strong> de los colombianos lo hace;
+            cada cosa que no compras es energía y basura que nunca existen.</li>
+            <li><strong>Decir no al plástico de un solo uso:</strong> lleva tu bolsa, tu termo y tu taper al mercado y a la tienda.</li>
+            <li><strong>Preferir productos locales y de temporada:</strong> menos kilómetros de transporte y menos refrigeración.</li>
+            <li><strong>Duradero antes que barato:</strong> repara, compra de segunda mano, intercambia ropa y aparatos.</li>
+          </ul>
+          <div class="meters-inline">
+            <div class="mi">Esfuerzo<span class="pips"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
+            <div class="mi">Costo<span class="pips"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span></div>
+            <div class="mi">Impacto<span class="pips"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step" style="--lvl:#ff6b6b">
+        <div class="n">5</div>
+        <div>
+          <h3>Tu colegio, tu barrio y tu trabajo: escalar lo que ya haces</h3>
+          <span class="who">Tú organizando a otros · requiere acuerdos</span>
+          <ul>
+            <li><strong>Estaciones de separación y puntos limpios</strong> en el colegio, el conjunto o la empresa,
+            señalizados con las tres bolsas.</li>
+            <li><strong>Compostera comunitaria:</strong> un lote, unas matas y el orgánico del barrio dejando de ir al relleno.</li>
+            <li><strong>Entregarle al reciclador de oficio</strong> del barrio lo aprovechable, en vez de botarlo:
+            él sostiene buena parte del 17–20 % que sí se recicla.</li>
+            <li><strong>Rutas escolares a pie o en bici</strong> y ciclorrutas seguras para bajar carros del trayecto diario.</li>
+            <li><strong>Vigilar el relleno local:</strong> con 321 rellenos cumpliendo vida útil en 4 años,
+            el problema ya no cabe dentro de la casa.</li>
+          </ul>
+          <div class="meters-inline">
+            <div class="mi">Esfuerzo<span class="pips"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
+            <div class="mi">Costo<span class="pips"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
+            <div class="mi">Impacto<span class="pips"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step" style="--lvl:#5ec8e5">
+        <div class="n">6</div>
+        <div>
+          <h3>Lo que hace el país — y que te toca exigir</h3>
+          <span class="who">Gobierno, empresas y regulación · 2030–2050</span>
+          <ul>
+            <li><strong>Frenar la deforestación</strong> de la Amazonía y el Pacífico: es la causa #1 con <strong>41,4 %</strong>
+            de las emisiones; si esto no se resuelve, lo demás no alcanza.</li>
+            <li><strong>Energías renovables</strong> —solar y eólica— para desplazar generación térmica y diésel en zonas aisladas.</li>
+            <li><strong>Transporte masivo y eléctrico:</strong> buses, cables y trenes, y reglas para el parque automotor.</li>
+            <li><strong>Ganadería sostenible</strong> y uso racional de fertilizantes, para bajar metano y óxido nitroso.</li>
+            <li><strong>Responsabilidad extendida y basura cero:</strong> que quien empaque pague por recoger, plantas de
+            aprovechamiento y metas obligatorias de desvío del relleno.</li>
+            <li>Esa es la ruta para cumplir <strong>−51 % al 2030</strong> y <strong>carbono neutro al 2050</strong>.</li>
+          </ul>
+          <div class="meters-inline">
+            <div class="mi">Esfuerzo<span class="pips"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
+            <div class="mi">Costo<span class="pips"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
+            <div class="mi">Impacto<span class="pips"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="alert" style="margin-top:26px;background:linear-gradient(180deg,rgba(61,220,151,.10),rgba(61,220,151,.04));border-color:#2f6a4f">
+      <h3 style="color:#a9f0cf">Si solo te llevas una cosa</h3>
+      <p style="color:#d6f0e2">
+        Los pasos 1, 2 y 3 no cuestan plata y los puedes empezar <strong>hoy en tu propia casa</strong>: apaga,
+        separa en tres bolsas y camina o pedalea un trayecto. Son la base de todo lo demás, porque cambian el
+        hábito antes de cambiar la infraestructura.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. RECICLAJE ============ -->
+<section id="reciclaje">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="num"><i>3</i> Promedio de personas que reciclan</div>
+      <h2>La cifra es muy baja — y el plástico es el punto crítico</h2>
+      <p class="sub">Entre el 17 % y el 20 % de todos los residuos del país se reciclan: unas 5 millones de toneladas.
+      Y detrás de esa cifra hay una brecha entre lo que la gente dice que hace y lo que realmente se aprovecha.</p>
+    </div>
+
+    <div class="recycle">
+      <div class="ring">
+        <svg viewBox="0 0 200 200" role="img" aria-label="Entre el 17 y el 20 por ciento de los residuos en Colombia se reciclan">
+          <circle cx="100" cy="100" r="82" fill="none" stroke="#26382e" stroke-width="17"></circle>
+          <circle id="arc" cx="100" cy="100" r="82" fill="none" stroke="url(#g)" stroke-width="17"
+                  stroke-linecap="round" stroke-dasharray="515" stroke-dashoffset="515"></circle>
+          <defs>
+            <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#2bbf83"></stop>
+              <stop offset="1" stop-color="#4fe3a6"></stop>
+            </linearGradient>
+          </defs>
+        </svg>
+        <div class="center">
+          <b>17–20 %</b>
+          <small>de los residuos<br>se recicla</small>
+        </div>
+      </div>
+
+      <div class="meters">
+        <div class="meter m1" data-pct="20">
+          <div class="top"><strong>Residuos efectivamente reciclados</strong><em>17–20 %</em></div>
+          <div class="track"><div class="fill"></div></div>
+          <small>Unas 5 millones de toneladas al año.</small>
+        </div>
+        <div class="meter m2" data-pct="42">
+          <div class="top"><strong>Colombianos que dicen reciclar</strong><em>42 %</em></div>
+          <div class="track"><div class="fill"></div></div>
+          <small>Papel, vidrio o plástico en su hogar, según NielsenIQ.</small>
+        </div>
+        <div class="meter m3" data-pct="8">
+          <div class="top"><strong>Plástico reciclado</strong><em>&lt; 8 %</em></div>
+          <div class="track"><div class="fill"></div></div>
+          <small>Del material más crítico: se generan 1,2 millones de toneladas al año.</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid g3" style="margin-top:34px">
+      <div class="stat amber"><b>42 %</b><span>de los colombianos <em>dice</em> reciclar en casa.</span></div>
+      <div class="stat"><b>~5 M t</b><span>de residuos reciclados al año, sobre 12 M t generadas.</span></div>
+      <div class="stat red"><b>1,2 M t</b><span>de plástico al año, del que se recicla menos del 8 %.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. BASURAS ============ -->
+<section id="basuras">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="num"><i>4</i> Promedio de basuras en Colombia</div>
+      <h2>32.000 toneladas diarias enterradas en rellenos que se llenan</h2>
+      <p class="sub">El país genera cerca de 12 millones de toneladas de basura al año. Cada colombiano produce
+      entre 0,64 y 0,95 kg diarios. El problema no es solo cuánto se genera, sino a dónde va.</p>
+    </div>
+
+    <div class="grid g4">
+      <div class="stat blue"><b>12 M t</b><span>de basura al año en el país.</span></div>
+      <div class="stat blue"><b>32–33 mil t</b><span>toneladas <em>diarias</em>, todos los días del año.</span></div>
+      <div class="stat"><b>0,64–0,95 kg</b><span>de basura por colombiano <em>cada día</em>.</span></div>
+      <div class="stat red"><b>321</b><span>rellenos sanitarios alcanzan su vida útil en los próximos 4 años.</span></div>
+    </div>
+
+    <div class="waste-visual">
+      <h3>¿A dónde va la basura? El 83 % termina enterrada</h3>
+      <p style="color:var(--muted);margin-bottom:14px">
+        Solo una fracción mínima se recupera. El resto se confina, y en el confinamiento la fracción orgánica
+        se descompone sin oxígeno: produce metano y lixiviados que amenazan el agua subterránea.
+      </p>
+      <div class="stack" role="img" aria-label="83 por ciento a relleno sanitario, 17 por ciento aprovechado o reciclado">
+        <div class="landfill" style="flex:83">83 %</div>
+        <div class="other" style="flex:17">17 %</div>
+      </div>
+      <div class="stack-key">
+        <span><i style="background:#e05c5c"></i>Relleno sanitario — 83 %</span>
+        <span><i style="background:#4fe3a6"></i>Reciclaje y aprovechamiento — 17 %</span>
+      </div>
+    </div>
+
+    <div class="alert" style="margin-top:24px">
+      <h3>⚠ Rellenos al borde del colapso</h3>
+      <p>
+        Muchos rellenos ya están a punto de colapsar: se estima que <strong>321 rellenos sanitarios</strong>
+        alcanzarán su vida útil en los próximos 4 años. Reducir lo que enterramos —compostando orgánicos y
+        separando bien— es la única forma de ganar tiempo mientras se amplía la capacidad de tratamiento.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ JUEGOS ============ -->
+<section id="juegos">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="num"><i>★</i> Para probar lo aprendido</div>
+      <h2>Dos minijuegos: unir y separar</h2>
+      <p class="sub">
+        El primero conecta cada problema con la solución que le corresponde. El segundo simula la cocina de tu
+        casa: toca un residuo y luego la bolsa donde va. Si te equivocas, el juego te explica por qué.
+      </p>
+    </div>
+
+    <div class="game">
+      <div class="game-head">
+        <h3>Juego 1 · Une el problema con su solución</h3>
+        <div class="score">
+          <span>Parejas: <b id="pScore">0/5</b></span>
+          <span>Intentos: <b id="pTries">0</b></span>
+          <button type="button" class="btn ghost" id="pReset">Reiniciar</button>
+        </div>
+      </div>
+      <p class="hint">Toca un problema de la izquierda y luego la solución que le corresponde en la derecha.</p>
+      <div class="pair">
+        <div class="pair-col">
+          <h4>Problema</h4>
+          <div class="opts" id="probList"></div>
+        </div>
+        <div class="pair-col">
+          <h4>Solución</h4>
+          <div class="opts" id="solList"></div>
+        </div>
+      </div>
+      <div class="fb" id="pairFb">Empieza tocando el primer problema.</div>
+    </div>
+
+    <div class="game">
+      <div class="game-head">
+        <h3>Juego 2 · ¿A qué bolsa va esto?</h3>
+        <div class="score">
+          <span>Aciertos: <b id="bScore">0</b></span>
+          <span>Fallos: <b id="bMiss">0</b></span>
+          <button type="button" class="btn ghost" id="bReset">Reiniciar</button>
+        </div>
+      </div>
+      <p class="hint">Toca un residuo de la bandeja y después la bolsa correcta.</p>
+
+      <div class="tray" id="tray"></div>
+
+      <div class="bags">
+        <button type="button" class="bag" data-bag="blanca">
+          <span class="ico">♻️</span><strong>Bolsa blanca</strong><small>Reciclable / aprovechable</small>
+        </button>
+        <button type="button" class="bag" data-bag="negra">
+          <span class="ico">🗑️</span><strong>Bolsa negra</strong><small>No aprovechable</small>
+        </button>
+        <button type="button" class="bag" data-bag="verde">
+          <span class="ico">🌱</span><strong>Bolsa verde</strong><small>Orgánico / compost</small>
+        </button>
+      </div>
+
+      <div class="tally">
+        <div><b id="tBlanca">0</b><small>g aprovechados</small></div>
+        <div><b id="tVerde">0</b><small>g compostados</small></div>
+        <div><b id="tRelleno">0</b><small>g al relleno</small></div>
+      </div>
+      <div class="fb" id="bagFb">La bandeja tiene 12 residuos de una casa colombiana promedio.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ METAS ============ -->
+<section id="metas">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="num">→</div>
+      <h2>El compromiso del país, en dos fechas</h2>
+      <p class="sub">Colombia se comprometió a reducir sus emisiones y a llegar a la neutralidad de carbono.
+      Cumplirlo depende de las cuatro escalas anteriores, no de una sola.</p>
+    </div>
+
+    <div class="goals">
+      <div class="goal">
+        <div class="year">Para 2030</div>
+        <b>−51 %</b>
+        <p>Reducción de emisiones frente al escenario de tendencia. Requiere frenar la deforestación
+        (41,4 %) y descarbonizar el transporte (30,03 %).</p>
+      </div>
+      <div class="goal">
+        <div class="year">Para 2050</div>
+        <b>0 neto</b>
+        <p>País carbono neutro: lo que se emite se equilibra con lo que capturan bosques, humedales y
+        suelos —los mismos que hoy se están perdiendo.</p>
+      </div>
+    </div>
+
+    <div class="grid g4" style="margin-top:26px">
+      <div class="card"><h3>Empieza hoy</h3><ul><li>Cambia a LED y apaga lo que no uses.</li><li>Separa en bolsa blanca, negra y verde.</li></ul></div>
+      <div class="card"><h3>Esta semana</h3><ul><li>Un trayecto en bus, bici o a pie.</li><li>Compost o punto limpio para el orgánico.</li></ul></div>
+      <div class="card"><h3>Este mes</h3><ul><li>Compra solo lo necesario.</li><li>Di no a los plásticos de un solo uso.</li></ul></div>
+      <div class="card"><h3>A largo plazo</h3><ul><li>Exige renovables y control de deforestación.</li><li>Vehículo híbrido o eléctrico al cambiar.</li></ul></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <h3>Fuentes de los datos citados</h3>
+    <ol>
+      <li>IDEAM — Inventarios de emisiones y participación por sector (deforestación 41,4 %; transporte y energía 30,03 %; agricultura y ganadería 19,57 %; residuos 6,08 %).</li>
+      <li>NielsenIQ — Percepción ciudadana sobre reciclaje en el hogar (42 %).</li>
+      <li>SUMA / Ministerio de Ambiente y Desarrollo Sostenible — Generación nacional de residuos (~12 M t/año; 0,64–0,95 kg/hab/día) y reciclaje efectivo (17–20 %).</li>
+      <li>Contribución Determinada a nivel Nacional (NDC) de Colombia — −51 % al 2030 y neutralidad de carbono al 2050.</li>
+    </ol>
+    <div class="disc">
+      Página divulgativa con fines académicos. Las cifras corresponden a los promedios nacionales citados en el
+      material de trabajo y pueden variar según el año del reporte y la fuente. El 2,92 % mostrado como
+      «otros sectores» es el diferencial aritmético frente al total, no una categoría reportada. Los gramos del
+      minijuego 2 son pesos ilustrativos de residuos domésticos comunes, no mediciones; la regla de separación
+      (blanca / negra / verde) puede variar según el operador de tu municipio.
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function setBar(el, pct){
+    // escala relativa al máximo (41,4 %) para que las barras sean comparables
+    var max = 41.4;
+    el.style.width = Math.max(2, (pct / max) * 100) + '%';
+  }
+
+  function animate(){
+    document.querySelectorAll('.bar-row').forEach(function(r){
+      setBar(r.querySelector('.fill'), parseFloat(r.dataset.pct));
+    });
+    document.querySelectorAll('.meter').forEach(function(m){
+      m.querySelector('.fill').style.width = m.dataset.pct + '%';
+    });
+    var arc = document.getElementById('arc');
+    if (arc) {
+      var circ = 515;
+      arc.style.transition = reduce ? 'none' : 'stroke-dashoffset 1.2s ease-out';
+      arc.style.strokeDashoffset = circ - circ * 0.185;
+    }
+  }
+
+  if (reduce) {
+    animate();
+  } else if ('IntersectionObserver' in window) {
+    var done = false;
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting && !done) { done = true; animate(); io.disconnect(); }
+      });
+    }, {threshold: 0.1});
+    io.observe(document.getElementById('problematicas'));
+    setTimeout(function(){ if(!done){ done=true; animate(); } }, 1200);
+  } else {
+    animate();
+  }
+
+  // ancho de las barras al cambiar el tamaño de ventana
+  window.addEventListener('resize', function(){
+    document.querySelectorAll('.bar-row').forEach(function(r){
+      setBar(r.querySelector('.fill'), parseFloat(r.dataset.pct));
+    });
+  });
+
+  /* ================= calculadora de basura ================= */
+  (function(){
+    var slider = document.getElementById('ppl');
+    if (!slider) return;
+    var MAXP = 49000000, LOW = 0.64, HIGH = 0.95, AVG = 0.795;
+    var forced = null;
+    var nf = new Intl.NumberFormat('es-CO');
+    var nf1 = new Intl.NumberFormat('es-CO',{maximumFractionDigits:1,minimumFractionDigits:1});
+
+    function personasDe(t){ return Math.max(1, Math.round(Math.pow(MAXP, t/100))); }
+    function posDe(p){ return Math.round(100 * Math.log(Math.max(1,p)) / Math.log(MAXP)); }
+    function trim(s){ return s.replace(',0',''); }
+    function compact(n){
+      if (n >= 1e6) return trim(nf1.format(n/1e6)) + ' millones';
+      if (n >= 1e4) return trim(nf1.format(n/1e3)) + ' mil';
+      return nf.format(n);
+    }
+    function kgRange(lo, hi){
+      if (hi < 1000) return trim(nf1.format(lo)) + ' – ' + trim(nf1.format(hi)) + ' kg';
+      if (hi < 1e6) return trim(nf1.format(lo/1e3)) + ' – ' + trim(nf1.format(hi/1e3)) + ' mil kg';
+      return trim(nf1.format(lo/1e6)) + ' – ' + trim(nf1.format(hi/1e6)) + ' millones kg';
+    }
+    function tons(n){
+      if (n >= 1e6) return trim(nf1.format(n/1e6)) + ' M t';
+      if (n >= 1000) return trim(nf1.format(n/1000)) + ' mil t';
+      return nf1.format(n) + ' t';
+    }
+
+    function render(){
+      var p = forced || personasDe(+slider.value);
+      var kgLo = p*LOW, kgHi = p*HIGH;
+      var tYear = p*AVG*365/1000;
+      var word = p === 1 ? 'persona' : 'personas';
+      var c = compact(p);
+      document.getElementById('pplOut').textContent =
+        (c.indexOf(' ') > -1 ? c + ' de ' + word : c + ' ' + word);
+      document.getElementById('kgDay').textContent = kgRange(kgLo, kgHi);
+      document.getElementById('tYear').textContent = tons(tYear);
+      document.getElementById('tLandfill').textContent = tons(tYear*0.83);
+      document.getElementById('tSaved').textContent = tons(tYear*0.185);
+      document.getElementById('calcNote').textContent =
+        'Cálculo propio con los promedios del país: ' + LOW.toString().replace('.',',') + '–' + HIGH.toString().replace('.',',') +
+        ' kg por persona al día, 83 % a relleno sanitario y apenas 17–20 % reciclado. La diferencia entre la tercera y la' +
+        ' cuarta casilla es lo que está en tus manos: separar el orgánico y el reciclable es lo que mueve toneladas del' +
+        ' relleno al compost y a la planta de aprovechamiento. Extrapolado a todo el país, este promedio da algo más de los' +
+        ' 12 millones de toneladas reportados, porque usa el extremo alto de la banda.';
+    }
+
+    slider.addEventListener('input', function(){ forced = null; render(); });
+    document.getElementById('presets').addEventListener('click', function(e){
+      var b = e.target.closest('button'); if (!b) return;
+      forced = +b.dataset.p;
+      slider.value = posDe(forced);
+      render();
+    });
+    render();
+  })();
+
+  /* ================= juego 1: unir problema y solución ================= */
+  (function(){
+    var host = document.getElementById('probList');
+    if (!host) return;
+    var PAIRS = [
+      {id:'def', p:'Se talan bosques para ganadería extensiva y cultivos — 41,4 % de las emisiones',
+       s:'Frenar la deforestación y proteger bosque, humedales y páramos',
+       why:'El bosque en pie es el sumidero natural de CO₂ del país: al talarlo se emite y además se pierde quien lo absorbe.'},
+      {id:'tra', p:'Carros a gasolina y diésel, 1,5 millones solo en Bogotá — 30,03 %',
+       s:'Transporte público, ciclorrutas, carro compartido y vehículos eléctricos',
+       why:'Ataca el 30,03 % y de paso la congestión y la contaminación del aire de la ciudad.'},
+      {id:'agr', p:'Metano del ganado y fertilizantes usados de más — 19,57 %',
+       s:'Ganadería sostenible, silvopastoreo y uso racional de fertilizantes',
+       why:'El metano del rumen es ~25 veces más contaminante que el CO₂ y el fertilizante contamina suelo y agua.'},
+      {id:'res', p:'Basura pudriéndose en rellenos: metano y lixiviados — 6,08 %',
+       s:'Separar el orgánico en bolsa verde, compostar y capturar el biogás',
+       why:'Con oxígeno no hay metano: el orgánico se convierte en abono en vez de en gas y lixiviados.'},
+      {id:'pla', p:'1,2 millones de toneladas de plástico al año y menos del 8 % reciclado',
+       s:'Decir no al de un solo uso, comprar a granel y que el productor responda por el empaque',
+       why:'Reciclar plástico es caro y limitado: la única salida real es no generar el residuo.'}
+    ];
+    var sel = null, done = 0, tries = 0;
+
+    function shuffle(a){
+      for (var i = a.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var t = a[i]; a[i] = a[j]; a[j] = t;
+      }
+      return a;
+    }
+    function fb(msg, cls){
+      var f = document.getElementById('pairFb');
+      f.textContent = msg; f.className = 'fb' + (cls ? ' ' + cls : '');
+    }
+    function status(){
+      document.getElementById('pScore').textContent = done + '/' + PAIRS.length;
+      document.getElementById('pTries').textContent = tries;
+    }
+    function build(){
+      sel = null; done = 0; tries = 0;
+      host.innerHTML = '';
+      var sol = document.getElementById('solList'); sol.innerHTML = '';
+      PAIRS.forEach(function(o){
+        var b = document.createElement('button');
+        b.type = 'button'; b.className = 'opt'; b.dataset.id = o.id; b.textContent = o.p;
+        b.addEventListener('click', function(){ pickLeft(b, o); });
+        host.appendChild(b);
+      });
+      shuffle(PAIRS.slice()).forEach(function(o){
+        var b = document.createElement('button');
+        b.type = 'button'; b.className = 'opt'; b.dataset.id = o.id; b.textContent = o.s;
+        b.addEventListener('click', function(){ pickRight(b, o); });
+        sol.appendChild(b);
+      });
+      status();
+      fb('Empieza tocando el primer problema.');
+    }
+    function pickLeft(btn, o){
+      if (btn.disabled) return;
+      document.querySelectorAll('#probList .opt').forEach(function(x){ x.classList.remove('sel'); });
+      btn.classList.add('sel'); sel = {btn:btn, o:o};
+      fb('Elegiste «' + o.p.split('—')[0].trim() + '». Ahora busca su solución a la derecha.');
+    }
+    function pickRight(btn, o){
+      if (btn.disabled) return;
+      if (!sel) { fb('Primero toca un problema de la izquierda.', 'no'); return; }
+      tries++;
+      if (btn.dataset.id === sel.o.id) {
+        btn.classList.remove('sel'); btn.classList.add('done'); btn.disabled = true;
+        sel.btn.classList.remove('sel'); sel.btn.classList.add('done'); sel.btn.disabled = true;
+        done++;
+        var msg = sel.o.why;
+        sel = null; status();
+        fb('¡Correcto! ' + msg, 'ok');
+        if (done === PAIRS.length) fb('Completaste las 5 parejas en ' + tries + ' intentos. Cada pareja es una de las escalas de la sección de soluciones.', 'ok');
+      } else {
+        btn.classList.add('wrong');
+        var wrong = btn;
+        setTimeout(function(){ wrong.classList.remove('wrong'); }, 400);
+        status();
+        fb('Esa solución ataca otro problema. Piensa en qué sector genera ese porcentaje de emisiones.', 'no');
+      }
+    }
+    document.getElementById('pReset').addEventListener('click', build);
+    build();
+  })();
+
+  /* ================= juego 2: ¿a qué bolsa va? ================= */
+  (function(){
+    var tray = document.getElementById('tray');
+    if (!tray) return;
+    var ITEMS = [
+      {n:'Botella de plástico limpia', b:'blanca', g:30,  why:'PET: el material más buscado por el reciclador de oficio, pero solo si está limpio y seco.'},
+      {n:'Cáscaras de plátano', b:'verde', g:180, why:'Orgánico: en el relleno se pudre sin oxígeno y suelta metano; en el compost se vuelve abono.'},
+      {n:'Papel higiénico usado', b:'negra', g:20, why:'Aunque es papel, está contaminado: nunca se recicla.'},
+      {n:'Caja de cartón del mercado', b:'blanca', g:250, why:'Cartón y papel son de los materiales con mejor tasa de aprovechamiento, si están secos.'},
+      {n:'Restos de arroz cocinado', b:'verde', g:150, why:'Comida cocinada también va al compost o a la bolsa verde, no al relleno.'},
+      {n:'Pañal desechable', b:'negra', g:250, why:'No tiene ruta de aprovechamiento: es de lo que más volumen ocupa en la bolsa negra.'},
+      {n:'Lata de gaseosa', b:'blanca', g:15, why:'Aluminio: se puede reciclar infinitas veces y vale más que cualquier otro residuo del hogar.'},
+      {n:'Bolsa metalizada de papas', b:'negra', g:35, why:'Ese empaque mezcla plástico y aluminio: no se puede separar y no es aprovechable.'},
+      {n:'Hojas y podas del jardín', b:'verde', g:400, why:'Materia vegetal: es el mejor material para estructurar una pila de compost.'},
+      {n:'Frasco de vidrio', b:'blanca', g:400, why:'Vidrio: 100 % reciclable. Enjuágalo y cuidado con las esquinas.'},
+      {n:'Colilla de cigarrillo', b:'negra', g:2, why:'El filtro es plástico contaminado con toxinas: una colilla contamina hasta 50 litros de agua.'},
+      {n:'Borra de café', b:'verde', g:60, why:'Excelente para compost: airea la pila y aporta nitrógeno.'}
+    ];
+    var BAGS = {
+      blanca:'♻️ bolsa blanca (reciclable)',
+      negra:'🗑️ bolsa negra (no aprovechable)',
+      verde:'🌱 bolsa verde (orgánico)'
+    };
+    var sel = null, hits = 0, miss = 0, left = 0, comp = 0, landfill = 0;
+
+    function fb(msg, cls){
+      var f = document.getElementById('bagFb');
+      f.textContent = msg; f.className = 'fb' + (cls ? ' ' + cls : '');
+    }
+    function tally(){
+      document.getElementById('tBlanca').textContent = left;
+      document.getElementById('tVerde').textContent = comp;
+      document.getElementById('tRelleno').textContent = landfill;
+      document.getElementById('bScore').textContent = hits;
+      document.getElementById('bMiss').textContent = miss;
+    }
+    function build(){
+      sel = null; hits = 0; miss = 0; left = 0; comp = 0; landfill = 0;
+      tray.innerHTML = '';
+      var order = ITEMS.map(function(o,i){ return {o:o, r:Math.random()}; }).sort(function(a,b){ return a.r-b.r; });
+      order.forEach(function(x){
+        var b = document.createElement('button');
+        b.type = 'button'; b.className = 'item'; b.textContent = x.o.n;
+        b.addEventListener('click', function(){
+          if (b.classList.contains('gone')) return;
+          tray.querySelectorAll('.item').forEach(function(i){ i.classList.remove('sel'); });
+          b.classList.add('sel');
+          sel = {btn:b, o:x.o};
+          fb('«' + x.o.n + '» seleccionado. Ahora toca la bolsa donde va.');
+        });
+        tray.appendChild(b);
+      });
+      tally();
+      fb('La bandeja tiene 12 residuos de una casa colombiana promedio. Toca uno para empezar.');
+    }
+    document.querySelector('.bags').addEventListener('click', function(e){
+      var bag = e.target.closest('.bag'); if (!bag) return;
+      if (!sel) { fb('Primero toca un residuo de la bandeja.', 'no'); return; }
+      var chosen = bag.dataset.bag, o = sel.o;
+      if (chosen === o.b) {
+        hits++;
+        sel.btn.classList.remove('sel'); sel.btn.classList.add('gone'); sel.btn.disabled = true;
+        if (o.b === 'blanca') left += o.g;
+        if (o.b === 'verde') comp += o.g;
+        if (o.b === 'negra') landfill += o.g;
+        var done = hits;
+        sel = null; tally();
+        fb('Correcto → ' + BAGS[o.b] + '. ' + o.why, 'ok');
+        if (done === ITEMS.length) {
+          var total = left + comp + landfill;
+          var pct = Math.round((left + comp) / total * 100);
+          fb('Bandeja vacía. De ' + total + ' g, salvaste del relleno ' + (left + comp) + ' g (' + pct +
+             ' %). En Colombia solo se aprovecha el 17–20 % de todo lo que se bota.', 'ok');
+        }
+      } else {
+        miss++;
+        bag.classList.add('wrong');
+        setTimeout(function(){ bag.classList.remove('wrong'); }, 400);
+        tally();
+        fb('Ahí no. «' + o.n + '» va en ' + BAGS[o.b] + ', porque ' + o.why.charAt(0).toLowerCase() + o.why.slice(1), 'no');
+      }
+    });
+    document.getElementById('bReset').addEventListener('click', build);
+    build();
+  })();
+})();
+</script>
+</body>
+</html>
